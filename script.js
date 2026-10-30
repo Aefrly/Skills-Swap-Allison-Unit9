@@ -74,3 +74,68 @@ findMatchButton.addEventListener("click", () => {
 		skill.column.hidden = !matchedSkills.has(skill);
 	});
 });
+
+//Copied from Resource 4
+document.addEventListener("DOMContentLoaded", async () => {
+	try {
+		await loadSkills();
+	} catch (error) {
+		console.error("Unable to load skills:", error);
+		document.getElementById("loading").hidden = true;
+		const errorMessage = document.getElementById("error");
+		errorMessage.innerHTML = "Unable to load skills. Please try again later.";
+		errorMessage.style.display = "block";
+	}
+});
+
+//Created from Copilot
+function renderSkills(skills) {
+	const container = document.getElementById("skills-container");
+	container.replaceChildren();
+	skillCards.splice(0, skillCards.length);
+
+	skills.forEach((skill) => {
+		const template = document.getElementById("skill-card-template");
+		const column = template.content.firstElementChild.cloneNode(true);
+		const body = column.querySelector(".card-body");
+
+		const title = document.createElement("h3");
+		title.className = "card-title h5";
+		title.innerHTML = skill.title;
+		body.append(title);
+
+		appendSkillText(body, "card-text", skill.description);
+
+		const category = skill.category;
+		appendSkillText(body, "text-muted skill-category", `Category: ${category}`);
+
+		const price = Number(skill.price);
+		appendSkillText(body, "skill-price fw-bold mt-auto mb-1", price === 0 ? "Free" : `$${price} / session`);
+
+		appendSkillText(body, "text-muted mb-0", `Provider: ${skill.provider}`);
+
+		container.append(column);
+		skillCards.push({ category, price, column });
+	});
+
+	document.getElementById("loading").hidden = true;
+}
+
+//Created from Copilot
+function appendSkillText(parent, className, text) {
+	const element = document.createElement("p");
+	element.className = className;
+	element.innerHTML = text;
+	parent.append(element);
+}
+
+//Copied from Resource 4 and changed with Copilot
+async function loadSkills() {
+	const skills = await fetchSkills();
+	if (!Array.isArray(skills)) {
+		throw new TypeError("The skills API response must be an array.");
+	}
+
+	renderSkills(skills);
+	return skills;
+}
