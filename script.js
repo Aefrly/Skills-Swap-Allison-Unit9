@@ -100,6 +100,7 @@ async function handleSkillFormSubmit(event) {
 	const skillData = {
 		title: form.elements.title.value.trim(),
 		category: form.elements.category.value.trim(),
+		provider: form.elements.provider.value.trim(),
 		price: Number(form.elements.price.value),
 		description: form.elements.description.value.trim(),
 	};
