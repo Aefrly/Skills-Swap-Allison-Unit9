@@ -1,0 +1,44 @@
+body {
+	color: #20322d;
+	background: #f4f6ef;
+}
+
+.navigation .col + .col {
+	border-left: 1px solid #d9e0d7;
+}
+
+.navigation .nav-link {
+	color: #24594c;
+	line-height: 1.25;
+}
+
+.hero-content {
+	max-width: 54rem;
+}
+
+.skill-card {
+	border-color: #d9e0d7;
+	transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.skill-card.is-expanded {
+	border-color: #24594c;
+}
+
+.skill-details {
+	padding-top: 0.75rem;
+	border-top: 1px solid #d9e0d7;
+	color: #43564f;
+}
+
+.skill-price {
+	color: #24594c;
+}
+
+@media (max-width: 420px) {
+	.navigation .nav-link {
+		padding-right: 0.25rem;
+		padding-left: 0.25rem;
+		font-size: 0.875rem;
+	}
+}

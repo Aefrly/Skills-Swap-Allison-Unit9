@@ -1,0 +1,24 @@
+{
+  "name": "skills-swap-allison-unit8",
+  "version": "1.0.0",
+  "description": "Skill Swap is a peer-to-peer platform where students offer and request skills like tutoring and coding help.",
+  "main": "script.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aefrly/Skills-Swap-Allison-Unit8.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Aefrly/Skills-Swap-Allison-Unit8/issues"
+  },
+  "homepage": "https://github.com/Aefrly/Skills-Swap-Allison-Unit8#readme",
+  "devDependencies": {
+    "jest": "^30.5.2"
+  }
+}
