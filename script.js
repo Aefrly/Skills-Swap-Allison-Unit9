@@ -77,6 +77,9 @@ findMatchButton.addEventListener("click", () => {
 
 //Copied from Resource 4
 document.addEventListener("DOMContentLoaded", async () => {
+	const skillForm = document.getElementById("skill-form");
+	skillForm.addEventListener("submit", handleSkillFormSubmit);
+
 	try {
 		await loadSkills();
 	} catch (error) {
@@ -87,6 +90,43 @@ document.addEventListener("DOMContentLoaded", async () => {
 		errorMessage.style.display = "block";
 	}
 });
+
+async function handleSkillFormSubmit(event) {
+	event.preventDefault();
+
+	const form = event.currentTarget;
+	const formMessage = document.getElementById("skill-form-message");
+	const submitButton = form.querySelector('button[type="submit"]');
+	const skillData = {
+		title: form.elements.title.value.trim(),
+		category: form.elements.category.value.trim(),
+		price: Number(form.elements.price.value),
+		description: form.elements.description.value.trim(),
+	};
+
+	formMessage.textContent = "";
+	submitButton.disabled = true;
+
+	try {
+		await createSkill(skillData);
+		form.reset();
+		formMessage.textContent = "Skill created successfully.";
+	} catch (error) {
+		console.error("Unable to create skill:", error);
+		formMessage.textContent = "Unable to create skill. Please try again.";
+		submitButton.disabled = false;
+		return;
+	}
+
+	try {
+		await loadSkills();
+	} catch (error) {
+		console.error("Skill was created, but the skills list could not be refreshed:", error);
+		formMessage.textContent = "Skill created, but the list could not be refreshed. Reload the page to see it.";
+	} finally {
+		submitButton.disabled = false;
+	}
+}
 
 //Created from Copilot
 function renderSkills(skills) {
